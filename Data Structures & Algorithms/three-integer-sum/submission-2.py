@@ -1,0 +1,31 @@
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        res = [] 
+        nums.sort()
+        
+        for i in range(len(nums)):
+            curr = nums[i]
+
+            if curr > 0: 
+                break
+
+            if i > 0 and curr == nums[i - 1]:
+                continue
+            
+            l = i + 1 
+            r = len(nums) - 1
+
+            while l < r:
+                point = nums[l] + nums[r] + curr
+                if point == 0:
+                    res.append([nums[i], nums[l], nums[r]])
+                    l += 1
+                    r -= 1
+                    while l < r and nums[r] == nums[r + 1]:
+                        r -= 1
+                elif point < 0:
+                    l += 1
+                else:
+                    r -= 1
+
+        return res
